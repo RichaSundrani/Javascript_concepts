@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+    <div><p><button onclick="clickCounter()" type="button">Click me!</button></p></div>
+    <br>
+          <div id="result">0</div>
+        <script>
+            function clickCounter (){
+                if(typeof(Storage)!=="undefined") {
+                    console.log("First " +  localStorage.clickcount);
+                    if(localStorage.clickcount) {
+                        console.log(localStorage.clickcount);
+                        localStorage.clickcount = Number (localStorage.clickcount) +1; 
+                    } else {
+                        localStorage.clickcount = 1;
+                    }
+                document.getElementById("result").innerHTML =  localStorage.clickcount ;
+             } else {
+                document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+                 }
+              }
+
+// OR use session Storage
+
+         function clickCounter (){
+                if(typeof(Storage)!=="undefined") {
+                    console.log("First " +  sessionStorage.clickcount);
+                    if(sessionStorage.clickcount) {
+                        console.log(sessionStorage.clickcount);
+                        sessionStorage.clickcount = Number (sessionStorage.clickcount) +1; 
+                    } else {
+                        sessionStorage.clickcount = 1;
+                    }
+                document.getElementById("result").innerHTML =  sessionStorage.clickcount ;
+             } else {
+                document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+                 }
+              }
+
+
+        </script>
+    </body>
+</html>
