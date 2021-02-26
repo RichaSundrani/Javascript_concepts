@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>addEventListeners</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .grandparent {
+            width: 300px;
+            height: 300px;
+            background-color: rgb(211, 9, 211);
+            padding: 50px;
+            text-align: center top;
+        }
+
+        .parent {
+            width: 200px;
+            height: 200px;
+            background-color: rgb(4, 138, 10);
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: top;
+        }
+        .child {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            text-align: center top;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .newDiv {
+            width: 300px;
+            height: 300px;
+            background-color: rgb(92, 10, 4);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="grandparent">
+            <div class="parent">
+                <div class="child"> </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let grandparent = document.querySelector('.grandparent');
+        let parent = document.querySelector('.parent');
+        let child = document.querySelector('.child');
+
+        document.addEventListener('click', (event) => console.log(`docuemnet ==> ${event.target}`));
+
+        grandparent.addEventListener('click', (event) => console.log(`grandparent capture ==> ${event.target}`), { capture: true });
+        grandparent.addEventListener('click', (event) => console.log(`grandparent bubble ==> ${event.target}`));
+
+        // parent.addEventListener('click', (event) => {
+        //     console.log(`prent bubble ==> ${event.target}`)
+        // },
+        //     { once: true }
+        // );
+
+        parent.addEventListener('click', greet);
+
+        child.addEventListener('click', (event) => {
+            console.log(`child bubble ==> ${event.target}`);
+            event.stopPropagation(); // Stope bubbling up the heirarchy
+        });
+
+        setTimeout(() => {
+            parent.removeEventListener('click', greet)
+        }, 2000);
+
+        function greet() {
+            console.log("Hello world!");
+        }
+
+        let allDivs = document.querySelectorAll('div');
+        // allDivs.forEach((div) => {
+        //     div.addEventListener('click', () => {
+        //         console.log('added addEventListener');
+        //     })
+        // }); 
+
+           document.addEventListener('click', (event)=>{
+               if(event.target.matches('div')){
+                console.log('added addEventListener');
+               }
+           })
+
+        const newDiv = document.createElement('div'); 
+        newDiv.classList.add('newDiv');
+        document.body.append(newDiv);
+
+    </script>
+</body>
+
+</html>
